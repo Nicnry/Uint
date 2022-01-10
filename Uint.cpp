@@ -6,7 +6,6 @@
 
 
 #include "Uint.hpp"
-#include <iostream>
 
 Uint::Uint() = default;
 
@@ -33,22 +32,28 @@ Uint operator+(Uint lhs, const Uint& rhs) {
 }
 
 Uint& Uint::operator+=(const Uint& rhs) {
+	Uint tutu = rhs;
 	//Définir le plus petit pour éviter les overflows
-	size_t lower = this->nombre.size() >= rhs.nombre.size() ? rhs.nombre.size() : this->nombre.size();
+	size_t difference_de_taille = 0;
+	if(this->nombre.size() > rhs.nombre.size()) {
+		difference_de_taille = this->nombre.size() - rhs.nombre.size();
+		for(size_t i = 0; i < difference_de_taille; ++i) {
+			tutu.nombre.push_back(0);
+		}
+	} else {
+		difference_de_taille = rhs.nombre.size() - this->nombre.size();
+		for(size_t i = 0; i < difference_de_taille; ++i) {
+			this->nombre.push_back(0);
+		}
+	}
 	int report = 0;
-
-	for(size_t i = 0; i < lower; ++i) {
-		//La somme ne dépassera jamais 18
-		int somme = this->nombre.at(i) + rhs.nombre.at(i);
-		this->nombre.at(i) = somme % 10 + report;
-		//Reporter à la prochaine boucle
+	for(size_t i = 0; i < this->nombre.size(); ++i) {
+		int somme = this->nombre.at(i) + tutu.nombre.at(i) + report;
+		this->nombre.at(i) = somme % 10;
 		report = somme / 10;
 	}
-	//Push_back
-	if(this->nombre.size() >= rhs.nombre.size()) {
-		this->nombre.back() = this->nombre.back() + report;
-	} else {
-		this->nombre.push_back(report + rhs.nombre.back());
+	if(report) {
+		this->nombre.push_back(report);
 	}
 	return *this;
 }
@@ -135,10 +140,15 @@ Uint &Uint::operator*=(const Uint &rhs) {
 			manipulations.nombre.at(l) = temp % 10;
 			report = temp / 10;
 		}
+
 		//Si il y a un dernier report
 		if(report) {
 			manipulations.nombre.push_back(report);
 		}
+		/*
+		std::cout << manipulations << std::endl;
+		std::cout << "Somme = " << manipulations + resultat << std::endl;
+		*/
 		report = 0;
 		resultat = manipulations + resultat;
 	}
@@ -206,7 +216,15 @@ Uint Uint::operator++(int) {
 }
 
 bool operator<(const Uint& lhs, const Uint& rhs) {
-	return lhs.nombre < rhs.nombre;
+	if(lhs.nombre.size() != rhs.nombre.size()) {
+		return lhs.nombre.size() < rhs.nombre.size();
+	}
+	for (size_t i = lhs.nombre.size(); i > 0; --i) {
+		if(lhs.nombre.at(i - 1) != rhs.nombre.at(i - 1)) {
+			return lhs.nombre.at(i - 1) < rhs.nombre.at(i - 1);
+		}
+	}
+	return false;
 }
 bool operator>(const Uint& lhs, const Uint& rhs) {return rhs < lhs;}
 bool operator<=(const Uint& lhs, const Uint& rhs) {return !(rhs < lhs);}

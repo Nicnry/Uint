@@ -23,126 +23,6 @@ uint32_t exponentiation_modulaire(uint64_t base, uint32_t exposant, uint32_t mod
 bool test_rapide_primalite(uint32_t nombre);
 
 int main() {
-	{
-		Uint b = 1;
-		Uint a = 1;
-		Uint res = 1;
-		a *= b;
-		cout << "1! = 1 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 1;
-		Uint a = 2;
-		Uint res = 2;
-		a *= b;
-		cout << "2! = 2 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 2;
-		Uint a = 3;
-		Uint res = 6;
-		a *= b;
-		cout << "3! = 6 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 6;
-		Uint a = 4;
-		Uint res = 24;
-		a *= b;
-		cout << "4! = 24 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 24;
-		Uint a = 5;
-		Uint res = 120;
-		a *= b;
-		cout << "5! = 120 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 120;
-		Uint a = 6;
-		Uint res = 720;
-		a *= b;
-		cout << "6! = 720 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 720;
-		Uint a = 7;
-		Uint res = 5040;
-		a *= b;
-		cout << "7! = 5040 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 5040;
-		Uint a = 8;
-		Uint res = 40320;
-		a *= b;
-		cout << "8! = 40320 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 40320;
-		Uint a = 9;
-		Uint res = 362880;
-		a *= b;
-		cout << "9! = 362880 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 362880;
-		Uint a = 10;
-		Uint res = 3628800;
-		a *= b;
-		cout << "10! = 3628800 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 3628800;
-		Uint a = 11;
-		Uint res = 39916800;
-		a *= b;
-		cout << "11! = 39916800 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 39916800;
-		Uint a = 12;
-		Uint res = 479001600;
-		a *= b;
-		cout << "12! = 479001600 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 479001600;
-		Uint a = 13;
-		Uint res = 6227020800;
-		a *= b;
-		cout << "13! = 6227020800 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 6227020800;
-		Uint a = 14;
-		Uint res = 87178291200;
-		a *= b;
-		cout << "14! = 87178291200 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
-	{
-		Uint b = 87178291200;
-		Uint a = 15;
-		Uint res = 1307674368000;
-		a *= b;
-		cout << "15! = 1307674368000 resultat = " << a;
-		cout << (a == res ? " ok" : " Sad") << endl;
-	}
 	string nombre;
 	cout << "Introduire un nombre entier: ";
 	cin >> nombre;
@@ -152,14 +32,12 @@ int main() {
 
 	cout << "Nombre lu " << n << endl; // Vérification opérateur <<
 
-	cout << "Log1" << endl;
 	Uint factorielle(1); // Vérification constructeur par entier (explicite)
 	for (size_t i = 2; i <= nb; ++i) {
 		factorielle *= i; // Vérification *= size_t
 		cout << i << "! = " << factorielle << endl;
 	}
 
-	cout << "Log2" << endl;
 	factorielle = 1;              // Vérification constructeur par entier implicite
 	for (Uint i = 2; i <= n; ++i) // Vérification <= et ++
 	{
@@ -168,7 +46,6 @@ int main() {
 
 	}
 
-	cout << "Log3" << endl;
 	Uint fibo_m2(0), fibo_m1(1), fibonacci;
 
 	for (Uint i = 2; i <= n; ++i) {
@@ -178,7 +55,6 @@ int main() {
 		fibo_m1 = fibonacci;
 	}
 
-	cout << "Log4" << endl;
 	// Vérification -, > et -=
 	for (Uint i = n - 1; i > 0; i -= 1) {
 		cout << "fibonacci(" << i << ") = " << fibo_m2 << endl;
@@ -186,7 +62,6 @@ int main() {
 		fibo_m1 = fibo_m2;
 		fibo_m2 = fibonacci - fibo_m2; // Vérification -
 	}
-
 
 	cout << "Log5" << endl;
 	for (Uint i = n; i > 0; i -= 1) {

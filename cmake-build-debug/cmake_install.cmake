@@ -1,4 +1,4 @@
-# Install script for directory: /Users/nawakine/Documents/HEIG/PRG/PRG1/labo30
+# Install script for directory: /Users/nawakine/Documents/HEIG/PRG/PRG1/labos/labo30
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/nawakine/Documents/HEIG/PRG/PRG1/labo30/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/nawakine/Documents/HEIG/PRG/PRG1/labos/labo30/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
