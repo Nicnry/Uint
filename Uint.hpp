@@ -28,7 +28,7 @@ class Uint {
 public:
 	Uint();
 	Uint(std::string);
-	Uint(size_t);
+	Uint(u_int64_t);
 	Uint division_reste(Uint diviseur);
 
 	Uint& operator+=(const Uint& rhs);

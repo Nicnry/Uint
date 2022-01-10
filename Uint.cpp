@@ -19,7 +19,7 @@ Uint::Uint(std::string nombre) {
 
 }
 
-Uint::Uint(size_t nombre) {
+Uint::Uint(u_int64_t nombre) {
 	//Simple copie
 	std::string nombre_string = std::to_string(nombre);
 	*this = Uint(nombre_string);
@@ -72,10 +72,14 @@ Uint operator-(Uint lhs, const size_t &rhs) {
 }
 
 Uint& Uint::operator-=(Uint& rhs) {
-	if(this->nombre.size() > rhs.nombre.size()) {
-		rhs.nombre.push_back(0);
+	// Check for underflow.
+	if(this->nombre.size() < rhs.nombre.size()) {
+		std::cerr << "Underflow";
+		*this = 0;
+		return *this;
 	}
-	for(size_t i = 0; i < this->nombre.size(); ++i) {
+
+	for(size_t i = 0; i < rhs.nombre.size(); ++i) {
 		//
 		if (this->nombre.at(i) >= rhs.nombre.at(i)) {
 			this->nombre.at(i) = this->nombre.at(i) - rhs.nombre.at(i);
@@ -157,41 +161,12 @@ Uint &Uint::operator*=(const Uint &rhs) {
 		if(report) {
 			manipulations.nombre.push_back(report);
 		}
-		/*
-		std::cout << manipulations << std::endl;
-		std::cout << "Somme = " << manipulations + resultat << std::endl;
-		*/
 		report = 0;
 		resultat = manipulations + resultat;
 	}
 
 	*this = resultat;
 	return *this;
-	/*
-	Uint resultat = 0;
-	Uint temp;
-	int produit;
-	int report = 0;
-	for(size_t i = 0; i < this->nombre.size(); ++i) {//a = 9
-		temp.nombre.clear();
-		for(size_t k = 0; k < i; ++k) {
-			temp.nombre.push_back(0);
-		}
-		for(int j : rhs.nombre) { // a = 9 b = 2 // a = 9 b = 1
-			produit = this->nombre.at(i) * j;//9*2 //9*1
-			temp.nombre.push_back((produit + report) % 10);//8 //0
-			report = (produit + report) / 10;//1//1
-		}
-		resultat += temp;
-
-	}
-	if(report) {
-		resultat.nombre.push_back(report);
-	}
-
-	*this = resultat;
-	return *this;
-	 */
 }
 
 Uint& Uint::operator*=(int& rhs) {

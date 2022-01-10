@@ -25,6 +25,14 @@ bool test_rapide_primalite(uint32_t nombre);
 int main() {
 
 	{
+		// 8225270
+		Uint a = 8237654;
+		Uint b = 12384;
+
+		a -= b;
+		cout << a << endl;
+	}
+	{
 		size_t a = 7400;
 		Uint b = a;
 		cout << a << "/2 = " << a/2 << " Uint => " << b.division_par2() << endl;
