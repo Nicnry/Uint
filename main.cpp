@@ -23,6 +23,12 @@ uint32_t exponentiation_modulaire(uint64_t base, uint32_t exposant, uint32_t mod
 bool test_rapide_primalite(uint32_t nombre);
 
 int main() {
+
+	{
+		size_t a = 7400;
+		Uint b = a;
+		cout << a << "/2 = " << a/2 << " Uint => " << b.division_par2() << endl;
+	}
 	string nombre;
 	cout << "Introduire un nombre entier: ";
 	cin >> nombre;

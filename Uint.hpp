@@ -40,9 +40,11 @@ public:
 	Uint &operator/=(const Uint &rhs);
 
 	Uint &operator*=(const Uint &rhs);
+	Uint& division_par2();
 private:
 	Nombre nombre;
-	void division_par2();
+	//void division_par2();
+
 };
 /*
 class Uint {

@@ -107,6 +107,17 @@ Uint& Uint::operator/=(const Uint &rhs) {
 	return *this;
 }
 
+Uint& Uint::division_par2() {
+	for(size_t i = 0; i < this->nombre.size(); ++i) {
+		if(i && this->nombre.at(i) % 2) {
+			this->nombre.at(i - 1) += 5;
+		}
+		this->nombre.at(i) /= 2;
+	}
+	if(!this->nombre.back()) {this->nombre.pop_back();}
+	return *this;
+}
+
 std::ostream& operator<<(std::ostream& lhs, const Uint& rhs) {
 	for (size_t i = rhs.nombre.size(); i > 0; --i) {
 		lhs << rhs.nombre.at(i - 1);
@@ -235,7 +246,7 @@ bool operator==(const Uint& lhs, const Uint& rhs) {
 }
 bool operator!=(const Uint& lhs, const Uint& rhs) {return !(lhs == rhs);}
 
-
+/*
 void Uint::division_par2() {
 	int report = 0;
 	int resultat;
@@ -257,6 +268,7 @@ void Uint::division_par2() {
 		}
 	}
 }
+*/
 
 Uint Uint::division_reste(Uint diviseur) {
 	Uint p2 = 1;
