@@ -23,20 +23,6 @@ uint32_t exponentiation_modulaire(uint64_t base, uint32_t exposant, uint32_t mod
 bool test_rapide_primalite(uint32_t nombre);
 
 int main() {
-
-	{
-		// 8225270
-		Uint a = 8237654;
-		Uint b = 12384;
-
-		a -= b;
-		cout << a << endl;
-	}
-	{
-		size_t a = 7400;
-		Uint b = a;
-		cout << a << "/2 = " << a/2 << " Uint => " << b.division_par2() << endl;
-	}
 	string nombre;
 	cout << "Introduire un nombre entier: ";
 	cin >> nombre;
@@ -77,7 +63,6 @@ int main() {
 		fibo_m2 = fibonacci - fibo_m2; // Vérification -
 	}
 
-	cout << "Log5" << endl;
 	for (Uint i = n; i > 0; i -= 1) {
 		cout << i << "! = " << factorielle << endl;
 		factorielle = factorielle / i; // Vérification Uint/Uint

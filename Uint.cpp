@@ -106,7 +106,6 @@ Uint operator/(Uint lhs, const Uint &rhs) {
 }
 
 Uint& Uint::operator/=(const Uint &rhs) {
-	std::cout << "okok" << std::endl;
 	*this = this->division_reste(rhs);
 	return *this;
 }
@@ -130,10 +129,7 @@ std::ostream& operator<<(std::ostream& lhs, const Uint& rhs) {
 }
 
 Uint operator*(Uint lhs, const size_t& rhs) {
-	for(size_t i = 0; i < lhs.nombre.size(); ++i) {
-		lhs.nombre.at(i) *= rhs;
-	}
-	return lhs;
+	return lhs *= rhs;
 }
 
 Uint &Uint::operator*=(const Uint &rhs) {
@@ -169,11 +165,11 @@ Uint &Uint::operator*=(const Uint &rhs) {
 	return *this;
 }
 
-Uint& Uint::operator*=(int& rhs) {
+/*Uint& Uint::operator*=(int& rhs) {
 	Uint facteur = rhs;
 	*this *= facteur;
 	return *this;
-}
+}*/
 
 Uint& Uint::operator++() {
 	//++n
