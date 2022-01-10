@@ -29,12 +29,6 @@ public:
 	Uint();
 	Uint(std::string);
 	Uint(size_t);
-	//bool operator>(const Uint& rhs) const;
-	//bool operator<(const Uint& rhs) const;
-	//bool operator<=(const Uint& rhs) const;
-	//bool operator>=(const Uint& rhs) const;
-	//bool operator==(const Uint& rhs) const;
-	//bool operator!=(const Uint& rhs) const;
 	Uint division_reste(Uint diviseur);
 
 	Uint& operator+=(const Uint& rhs);
@@ -42,7 +36,7 @@ public:
 	Uint& operator-=(const size_t& rhs);
 	Uint& operator*=(int& rhs);
 	Uint& operator++();
-	Uint operator++(int);
+	const Uint operator++(int);
 	Uint &operator/=(const Uint &rhs);
 
 	Uint &operator*=(const Uint &rhs);

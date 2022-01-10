@@ -102,6 +102,7 @@ Uint operator/(Uint lhs, const Uint &rhs) {
 }
 
 Uint& Uint::operator/=(const Uint &rhs) {
+	std::cout << "okok" << std::endl;
 	*this = this->division_reste(rhs);
 	return *this;
 }
@@ -208,7 +209,7 @@ Uint& Uint::operator++() {
 	return *this;
 }
 
-Uint Uint::operator++(int) {
+const Uint Uint::operator++(int) {
 	//n++
 	Uint temp = *this;
 	++*this;
