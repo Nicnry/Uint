@@ -88,7 +88,8 @@ Uint& Uint::operator-=(Uint& rhs) {
 			this->nombre.at(i + 1) = this->nombre.at(i + 1) - 1;
 		}
 	}
-	if (!this->nombre.back()) {
+
+	while(!this->nombre.back() && this->nombre.size() != 0) {
 		this->nombre.pop_back();
 	}
 	return *this;
@@ -192,25 +193,51 @@ const Uint Uint::operator++(int) {
 	return temp;
 }
 
-bool operator<(const Uint& lhs, const Uint& rhs) {
-	if(lhs.nombre.size() != rhs.nombre.size()) {
-		return lhs.nombre.size() < rhs.nombre.size();
+int Uint::comp(const Uint& a, const Uint& b) const {
+	if(a.nombre == b.nombre) {
+		return 0;
 	}
-	for (size_t i = lhs.nombre.size(); i > 0; --i) {
-		if(lhs.nombre.at(i - 1) != rhs.nombre.at(i - 1)) {
-			return lhs.nombre.at(i - 1) < rhs.nombre.at(i - 1);
+	//lhs < rhs
+	if (a.nombre.size() < b.nombre.size()) {
+		return -1;
+	}
+	//lhs < rhs
+	if(a.nombre.size() == b.nombre.size()) {
+		for (size_t i = a.nombre.size(); i > 0; --i) {
+			if(a.nombre.at(i - 1) < b.nombre.at(i - 1)) {
+				return -1;
+			}
+			if(a.nombre.at(i - 1) > b.nombre.at(i - 1)) {
+				return 1;
+			}
 		}
 	}
-	return false;
+	return 1;
 }
 
-bool operator>(const Uint& lhs, const Uint& rhs) {return rhs < lhs;}
-bool operator<=(const Uint& lhs, const Uint& rhs) {return !(rhs < lhs);}
-bool operator>=(const Uint& lhs, const Uint& rhs) {return !(lhs < rhs);}
-bool operator==(const Uint& lhs, const Uint& rhs) {
-	return lhs.nombre == rhs.nombre;
+bool Uint::operator<(const Uint& rhs) const {
+	return comp(*this, rhs) == -1;
 }
-bool operator!=(const Uint& lhs, const Uint& rhs) {return !(lhs == rhs);}
+
+bool Uint::operator>(const Uint& rhs) const {
+	return comp(*this, rhs) == 1;
+}
+
+bool Uint::operator<=(const Uint& rhs) const {
+	return (comp(*this, rhs) == -1 || comp(*this, rhs) == 0) ;
+}
+
+bool Uint::operator>=(const Uint& rhs) const {
+	return (comp(*this, rhs) == 1 || comp(*this, rhs) == 0);
+}
+
+bool Uint::operator==(const Uint& rhs) const {
+	return comp(*this, rhs) == 0;
+}
+
+bool Uint::operator!=(const Uint& rhs) const {
+	return comp(*this, rhs) != 0;
+}
 
 Uint Uint::division_reste(Uint diviseur) {
 	Uint p2 = 1;
@@ -221,29 +248,12 @@ Uint Uint::division_reste(Uint diviseur) {
 	}
 	Uint quotient = 0;
 	Uint reste = *this;
-	/*
-	for(size_t i = 0; i < this->nombre.size(); ++i) {
-		reste.nombre.push_back(this->nombre.at(i));
-		std::cout << this->nombre.at(i) << std::endl;
-	}
-	*/
 	while (reste >= diviseur) {
-		//std::cout << "b " << b << " p2 " << p2 << " reste " << reste
-		//<< " quotient " << quotient<< std::endl;
 		b.division_par2();
-		//std::cout << "b " << b << std::endl;
 		p2.division_par2();
-		//std::cout << "p2 " << p2 << std::endl;
-		//marche jusqu'à 11!
-		if(reste.nombre.back() == 0) {
-			reste = 0;
-		}
 		if (reste >= b) {
 			quotient = quotient + p2;
-			//std::cout << "quotient " << quotient << std::endl;
-			//std::cout << "reste1 " << reste << std::endl;
 			reste = reste - b;
-			//std::cout << "reste2 " << reste << std::endl;
 		}
 	}
 

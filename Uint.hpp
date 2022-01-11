@@ -18,17 +18,19 @@ class Uint {
 	friend Uint operator+(Uint lhs, const Uint& rhs);
 	friend Uint operator-(Uint lhs, Uint &rhs);
 	friend Uint operator-(Uint lhs, const size_t &rhs);
-	friend bool operator<(const Uint& lhs, const Uint& rhs);
-	friend bool operator>(const Uint& lhs, const Uint& rhs);
-	friend bool operator<=(const Uint& lhs, const Uint& rhs);
-	friend bool operator>=(const Uint& lhs, const Uint& rhs);
-	friend bool operator==(const Uint& lhs, const Uint& rhs);
-	friend bool operator!=(const Uint& lhs, const Uint& rhs);
 	friend Uint operator/(Uint lhs, const Uint &rhs);
 public:
 	Uint();
 	Uint(std::string);
 	Uint(uint64_t);
+
+	bool operator<(const Uint& rhs) const;
+	bool operator>(const Uint& rhs) const;
+	bool operator<=(const Uint& rhs) const;
+	bool operator>=(const Uint& rhs) const;
+	bool operator==(const Uint& rhs) const;
+	bool operator!=(const Uint& rhs) const;
+
 	Uint division_reste(Uint diviseur);
 
 	Uint& operator+=(const Uint& rhs);
@@ -42,6 +44,7 @@ public:
 	Uint& division_par2();
 private:
 	Nombre nombre;
+	int comp(const Uint& a, const Uint& b) const;
 	//void division_par2();
 
 };
