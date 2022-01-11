@@ -74,7 +74,11 @@ Uint& Uint::operator-=(Uint& rhs) {
 		*this = 0;
 		return *this;
 	}
-
+	if(this->nombre.size() > rhs.nombre.size()) {
+		for(size_t i = 0;  i < this->nombre.size() - rhs.nombre.size(); ++i) {
+			rhs.nombre.push_back(0);
+		}
+	}
 	for(size_t i = 0; i < rhs.nombre.size(); ++i) {
 		//
 		if (this->nombre.at(i) >= rhs.nombre.at(i)) {
@@ -143,9 +147,9 @@ Uint &Uint::operator*=(const Uint &rhs) {
 			manipulations.nombre.push_back(this->nombre.at(i) * j);
 		}
 		//Recalculer chaque cellule
-		for(size_t l = 0; l < manipulations.nombre.size(); ++l) {
-			int temp = manipulations.nombre.at(l) + report;
-			manipulations.nombre.at(l) = temp % 10;
+		for(int& l : manipulations.nombre) {
+			int temp = l + report;
+			l = temp % 10;
 			report = temp / 10;
 		}
 
@@ -199,6 +203,7 @@ bool operator<(const Uint& lhs, const Uint& rhs) {
 	}
 	return false;
 }
+
 bool operator>(const Uint& lhs, const Uint& rhs) {return rhs < lhs;}
 bool operator<=(const Uint& lhs, const Uint& rhs) {return !(rhs < lhs);}
 bool operator>=(const Uint& lhs, const Uint& rhs) {return !(lhs < rhs);}
@@ -210,20 +215,37 @@ bool operator!=(const Uint& lhs, const Uint& rhs) {return !(lhs == rhs);}
 Uint Uint::division_reste(Uint diviseur) {
 	Uint p2 = 1;
 	Uint b = diviseur;
-	Uint quotient = 0;
-	Uint reste = *this;
 	while (b <= *this) {
 		p2 *= 2;
 		b *= 2;
 	}
+	Uint quotient = 0;
+	Uint reste = *this;
+	/*
+	for(size_t i = 0; i < this->nombre.size(); ++i) {
+		reste.nombre.push_back(this->nombre.at(i));
+		std::cout << this->nombre.at(i) << std::endl;
+	}
+	*/
 	while (reste >= diviseur) {
+		//std::cout << "b " << b << " p2 " << p2 << " reste " << reste
+		//<< " quotient " << quotient<< std::endl;
 		b.division_par2();
+		//std::cout << "b " << b << std::endl;
 		p2.division_par2();
-
+		//std::cout << "p2 " << p2 << std::endl;
+		//marche jusqu'à 11!
+		if(reste.nombre.back() == 0) {
+			reste = 0;
+		}
 		if (reste >= b) {
 			quotient = quotient + p2;
+			//std::cout << "quotient " << quotient << std::endl;
+			//std::cout << "reste1 " << reste << std::endl;
 			reste = reste - b;
+			//std::cout << "reste2 " << reste << std::endl;
 		}
 	}
+
 	return quotient;
 }

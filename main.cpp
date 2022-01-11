@@ -62,7 +62,7 @@ int main() {
 		fibo_m1 = fibo_m2;
 		fibo_m2 = fibonacci - fibo_m2; // Vérification -
 	}
-	/*
+	cout << "fibo " << n << " factorielle " << factorielle << endl;
 	for (Uint i = n; i > 0; i -= 1) {
 		cout << i << "! = " << factorielle << endl;
 		factorielle = factorielle / i; // Vérification Uint/Uint
