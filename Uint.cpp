@@ -15,7 +15,7 @@ Uint::Uint(std::string nombre) {
 	}
 }
 
-Uint::Uint(u_int64_t nombre) {
+Uint::Uint(uint64_t nombre) {
 	//Simple copie
 	std::string nombre_string = std::to_string(nombre);
 	*this = Uint(nombre_string);
